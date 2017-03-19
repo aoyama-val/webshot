@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -x
+
+function_name="webshot"
+zip_path="/tmp/$function_name.zip"
+
+rm -f "$zip_path"
+zip -r $zip_path .
+aws lambda update-function-code --function-name "$function_name" --zip-file fileb://$zip_path
+
+#aws s3 cp /tmp/webshot.zip s3://files-skybrain.ekispert.jp/
