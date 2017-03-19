@@ -29,6 +29,19 @@ sh     ウィンドウの高さ
 aws lambda invoke --function-name webshot --payload '{"url": "http://www.yahoo.co.jp", "bucket": "files-skybrain.ekispert.jp", "key": "test2.png"}' /dev/stdout
 ```
 
+## fontconfigをビルドした方法
+
+Amazon Linux 2016.09 にて：
+
+```
+yum install -y gperf freetype-devel libxml2-devel python27-lxml libtool automake
+
+git clone http://anongit.freedesktop.org/git/fontconfig -b 2.12.1
+cd fontconfig
+./autogen.sh --sysconfdir=/tmp/skybrain_fontconfig/etc --prefix=/tmp/skybrain_fontconfig/usr --mandir=/tmp/skybrain_fontconfig/usr/share/man --enable-libxml2
+make && make install
+```
+
 
 ## 参考
 
