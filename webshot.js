@@ -8,15 +8,16 @@ var fs = require('fs');
 var aws = require('aws-sdk');
 
 var options = {
-    renderDelay: 2000,
-    screenSize: {
-        width: 1080,
-        height: 1920
-    },
-    shotSize: {
-        width: 1080,
-        height: 'all'
-    }
+  renderDelay: 2000,
+  defaultWhiteBackground: true,
+  screenSize: {
+    width: 1080,
+    height: 1920
+  },
+  shotSize: {
+    width: 1080,
+    height: 'all'
+  }
 };
 
 var url     = process.argv[2];  // 例: "https://skybrain.ekispert.jp/signage/id/1?index=0"

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# このディレクトリをzipで固めてLambdaにデプロイするスクリプト
+
 set -x
 
 function_name="webshot"
