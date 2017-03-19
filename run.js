@@ -3,7 +3,7 @@
 var index = require("./index");
 
 var event = {
-  url: 'http://www.yahoo.co.jp',
+  url: 'http://forest.watch.impress.co.jp/',
   bucket: 'files-skybrain.ekispert.jp',
   key: 'test.png'
 };

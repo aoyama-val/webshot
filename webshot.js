@@ -7,27 +7,29 @@ var webshot = require('webshot');
 var fs = require('fs');
 var aws = require('aws-sdk');
 
+var url     = process.argv[2];  // 例: "https://skybrain.ekispert.jp/signage/id/1?index=0"
+var bucket  = process.argv[3];  // 例: "files-skybrain.ekispert.jp"
+var key     = process.argv[4];  // 例: "1.png"
+var sw      = process.argv[5] ? parseInt(process.argv[5]) : 1080;
+var sh      = process.argv[6] ? parseInt(process.argv[6]) : 1920;
+
 var options = {
   renderDelay: 2000,
   defaultWhiteBackground: true,
   screenSize: {
-    width: 1080,
-    height: 1920
+    width: sw,
+    height: sh
   },
   shotSize: {
-    width: 1080,
-    height: 'all'
+    width: sw,
+    height: sh
   }
 };
-
-var url     = process.argv[2];  // 例: "https://skybrain.ekispert.jp/signage/id/1?index=0"
-var bucket  = process.argv[3];  // 例: "files-skybrain.ekispert.jp"
-var key     = process.argv[4];  // 例: "1.png"
 
 webshot(url, tmp_file_path, options, function(err) {
   if (err) {
     console.log("error", err);
-    return;
+    process.exit(1);
   }
 
   // /tmp/screen.pngをS3にアップロード
@@ -35,7 +37,7 @@ webshot(url, tmp_file_path, options, function(err) {
   new aws.S3().upload(params, function(err, data) {
     if (err) {
       console.log("error", err);
-      return;
+      process.exit(2);
     }
     console.log("Upload success");
   });
